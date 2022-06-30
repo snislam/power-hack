@@ -1,9 +1,10 @@
 import React from 'react';
+import BillingBody from '../components/BillingBody';
 
 const Home = () => {
     return (
         <div>
-            This is home page
+            <BillingBody />
         </div>
     );
 };

@@ -12,7 +12,7 @@ const Navbar = () => {
                 </div>
 
                 <div>
-                    <p>Paid Total: 0</p>
+                    <p className='font-semibold'>Paid Total: 0</p>
                 </div>
 
             </div>
