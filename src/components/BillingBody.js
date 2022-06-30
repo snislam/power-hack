@@ -1,4 +1,5 @@
 import React from 'react';
+import Modal from './Modal';
 import TableRow from './TableRow';
 
 const BillingBody = () => {
@@ -11,12 +12,12 @@ const BillingBody = () => {
                     <input className='border-2 border-slate-500 bg-slate-300 px-2' type="text" placeholder='Search' />
                 </div>
                 <div>
-                    <button className='bg-slate-900 py-1 px-5 text-slate-50'>
-                        Add New Bill
+                    <button className='bg-slate-900 px-5 py-2 text-slate-50'>
+                        <label for="my-modal-6">Add New Bill</label>
                     </button>
                 </div>
             </div>
-
+            <Modal />
             <div class="overflow-x-auto bg-slate-200 p-5">
                 <table class="table w-full border-collapse">
                     {/* table head */}
