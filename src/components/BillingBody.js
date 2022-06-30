@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useQuery } from 'react-query';
 import Modal from './Modal';
 import TableRow from './TableRow';
 
 const BillingBody = () => {
+    const [addedRow, setAddedRow] = useState('')
+    const { data, isLoading, refetch } = useQuery('bills', () =>
+        fetch(`http://localhost:5000/billing-list`)
+            .then(res => res.json())
+    )
+
+    if (isLoading) {
+        return 'loading'
+    }
+
     return (
         <div className='overflow-x-auto my-10 px-20 mx-auto'>
 
@@ -13,13 +24,15 @@ const BillingBody = () => {
                 </div>
                 <div>
                     <button className='bg-slate-900 px-5 py-2 text-slate-50'>
-                        <label for="my-modal-6">Add New Bill</label>
+                        <label htmlFor="my-modal-6">Add New Bill</label>
                     </button>
                 </div>
             </div>
-            <Modal />
-            <div class="overflow-x-auto bg-slate-200 p-5">
-                <table class="table w-full border-collapse">
+
+            <Modal setAddedRow={setAddedRow} refetch={refetch} />
+
+            <div className="overflow-x-auto bg-slate-200 p-5">
+                <table className="table w-full border-collapse">
                     {/* table head */}
                     <thead className='py-3'>
                         <tr>
@@ -28,10 +41,16 @@ const BillingBody = () => {
                             <th className='text-left border border-slate-900 p-2'>Email</th>
                             <th className='text-left border border-slate-900 p-2'>Phone</th>
                             <th className='text-left border border-slate-900 p-2'>Pay Amount</th>
+                            <th className='text-left border border-slate-900 p-2'>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <TableRow />
+                        {
+                            data.map(d => <TableRow key={d._id} bill={d} refetch={refetch} />)
+                        }
+                        {
+                            addedRow && <TableRow bill={addedRow} />
+                        }
                     </tbody>
                 </table>
             </div>

@@ -2,14 +2,13 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 
-const Modal = ({ setAddedRow, refetch }) => {
+const UpdateModal = ({ refetch, id }) => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const onSubmit = data => {
         console.log(data);
-        setAddedRow(data);
 
-        fetch(`http://localhost:5000/add-billing`, {
-            method: 'POST',
+        fetch(`http://localhost:5000/add-billing/${id}`, {
+            method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
@@ -17,13 +16,11 @@ const Modal = ({ setAddedRow, refetch }) => {
         })
             .then(res => res.json())
             .then(data => {
-                if (data.insertedId) {
-                    toast.success('Bill added')
+                if (data.modifiedCount) {
                     refetch()
-                    setAddedRow('')
+                    toast.success('Successfully updated')
                 } else {
-                    toast('Bill not added')
-                    setAddedRow('')
+                    toast.warning('Update failed')
                 }
             })
 
@@ -31,14 +28,11 @@ const Modal = ({ setAddedRow, refetch }) => {
     };
 
     return (
-        <div>
-            {/* <!-- The button to open modal --> */}
-            {/* <label htmlFor="my-modal-6" className="btn modal-button">open modal</label> */}
-
-            <input type="checkbox" id="my-modal-6" className="modal-toggle" />
+        <>
+            <input type="checkbox" id="update-modal" className="modal-toggle" />
             <div className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box relative">
-                    <label htmlFor="my-modal-6" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <label htmlFor="update-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                     <form className='flex-1 flex flex-col p-5' onSubmit={handleSubmit(onSubmit)}>
 
                         {/* name input field */}
@@ -118,17 +112,17 @@ const Modal = ({ setAddedRow, refetch }) => {
                         {errors.amount?.type === "required" && <p className='text-sm text-red-500'>{errors.amount.message}</p>}
 
 
-                        <button className="modal-action" type="submit">
-                            <label htmlFor="my-modal-6" className="btn">Add Bill</label>
-                        </button>
+                        <div>
+                            <button className="modal-action" type="submit">
+                                <label htmlFor="update-modal" className="btn"> Update Bill</label>
+                            </button>
+                        </div>
 
                     </form>
-
-
                 </div>
             </div>
-        </div >
+        </ >
     );
 };
 
-export default Modal;
+export default UpdateModal;
