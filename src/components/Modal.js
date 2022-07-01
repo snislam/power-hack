@@ -8,7 +8,7 @@ const Modal = ({ setAddedRow, refetch }) => {
         console.log(data);
         setAddedRow(data);
 
-        fetch(`http://localhost:5000/add-billing`, {
+        fetch(`https://enigmatic-retreat-31550.herokuapp.com/add-billing`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

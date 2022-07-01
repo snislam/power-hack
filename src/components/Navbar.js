@@ -4,7 +4,7 @@ import { useQuery } from 'react-query';
 
 const Navbar = () => {
     const { data, isLoading } = useQuery('bills', () =>
-        fetch(`http://localhost:5000/billing-list`)
+        fetch(`https://enigmatic-retreat-31550.herokuapp.com/billing-list`)
             .then(res => res.json())
     )
 

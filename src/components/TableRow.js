@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 const TableRow = ({ bill, refetch }) => {
     const { _id, name, email, phone, amount } = bill;
     const confirmDelete = () => {
-        fetch(`http://localhost:5000/delete-billing/${_id}`, {
+        fetch(`https://enigmatic-retreat-31550.herokuapp.com/delete-billing/${_id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

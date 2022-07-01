@@ -9,12 +9,12 @@ const BillingBody = () => {
     const [pageCount, setPageCount] = useState(0)
     const [pageNumber, setPageNumber] = useState(0)
     const limit = 10;
-    const { data, isLoading, refetch } = useQuery('bills', () => fetch(`http://localhost:5000/billing-list?page=${pageNumber}&size=${limit}`)
+    const { data, isLoading, refetch } = useQuery('bills', () => fetch(`https://enigmatic-retreat-31550.herokuapp.com/billing-list?page=${pageNumber}&size=${limit}`)
         .then(res => res.json())
     )
 
     useEffect(() => {
-        fetch('http://localhost:5000/billingscount')
+        fetch('https://enigmatic-retreat-31550.herokuapp.com/billingscount')
             .then(res => res.json())
             .then(data => {
                 const count = data.count;
@@ -33,7 +33,7 @@ const BillingBody = () => {
         e.preventDefault();
         const email = e.target.email.value;
         console.log(email)
-        fetch(`http://localhost:5000/search-billing-email/${email}`)
+        fetch(`https://enigmatic-retreat-31550.herokuapp.com/search-billing-email/${email}`)
             .then(res => res.json())
             .then(data => {
                 setSearchData(data)
@@ -45,7 +45,7 @@ const BillingBody = () => {
         e.preventDefault();
         const name = e.target.name.value;
         console.log(name)
-        fetch(`http://localhost:5000/search-billing-name/${name}`)
+        fetch(`https://enigmatic-retreat-31550.herokuapp.com/search-billing-name/${name}`)
             .then(res => res.json())
             .then(data => {
                 setSearchData(data)
@@ -57,7 +57,7 @@ const BillingBody = () => {
         e.preventDefault();
         const number = e.target.number.value;
         console.log(number)
-        fetch(`http://localhost:5000/search-billing-number/${number}`)
+        fetch(`https://enigmatic-retreat-31550.herokuapp.com/search-billing-number/${number}`)
             .then(res => res.json())
             .then(data => {
                 setSearchData(data)

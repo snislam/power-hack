@@ -9,7 +9,7 @@ const UpdateBill = () => {
     const onSubmit = data => {
         console.log(data);
 
-        fetch(`http://localhost:5000/add-billing/${id}`, {
+        fetch(`https://enigmatic-retreat-31550.herokuapp.com/add-billing/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
