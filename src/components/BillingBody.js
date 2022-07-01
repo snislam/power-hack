@@ -20,6 +20,7 @@ const BillingBody = () => {
                 const count = data.count;
                 const page = Math.ceil(count / limit);
                 setPageCount(page);
+                refetch()
             })
     }, [])
 
